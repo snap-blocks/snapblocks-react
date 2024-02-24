@@ -1,34 +1,34 @@
-# scratchblocks-react
+# snapblocks-react
 
-Render [scratchblocks](https://github.com/scratchblocks/scratchblocks) in React!
+Render [snapblocks](https://github.com/snap-blocks/snapblocks) in React!
 
 ## Installation
 
 ```bash
-npm install scratchblocks scratchblocks-react
+npm install snapblocks snapblocks-react
 # or
-yarn add scratchblocks scratchblocks-react
+yarn add snaphblocks snapblocks-react
 ```
 
-Note that in addition to the `scratchblocks-react` package, you must have `scratchblocks` installed (and `react`).
+Note that in addition to the `snapblocks-react` package, you must have `snapblocks` installed (and `react`).
 
 ## Usage
 
 ### Simple
 
 ```jsx
-import ScratchBlocks from "scratchblocks-react"
+import SnapBlocks from "snapblocks-react"
 
 function MyComponent() {
   return (
-    <ScratchBlocks blockStyle="scratch3">
+    <SnapBlocks blockStyle="snap">
       {`
         when green flag clicked
-        forever
+        forever {
           move (10) steps
-        end
+        }
       `}
-    </ScratchBlocks>
+    </SnapBlocks>
   )
 }
 ```
@@ -38,7 +38,7 @@ function MyComponent() {
 In this example, the user can edit the Scratch code.
 
 ```jsx
-import ScratchBlocks from "scratchblocks-react"
+import SnapBlocks from "snapblocks-react"
 
 function MyComponent() {
   const [code, setCode] = useState("move (10) steps")
@@ -49,7 +49,7 @@ function MyComponent() {
         value={code}
         onChange={(event) => setCode(event.target.value)}
       />
-      <ScratchBlocks blockStyle="scratch3">{code}</ScratchBlocks>
+      <SnapBlocks blockStyle="scratch3">{code}</SnapBlocks>
     </div>
   )
 }
@@ -58,19 +58,19 @@ function MyComponent() {
 ### Non-English Languages
 
 ```jsx
-import ScratchBlocks from "scratchblocks-react"
+import SnapBlocks from "snapblocks-react"
 
 // Load some extra languages (English comes loaded by default)
-import scratchblocks from "scratchblocks"
-import es from "scratchblocks/locales/es.json" // Spanish
-import de from "scratchblocks/locales/de.json" // German
+import snapblocks from "snapblocks"
+import es from "snapblocks/locales/es.json" // Spanish
+import de from "snapblocks/locales/de.json" // German
 
-// Register the language files with scratchblocks
-scratchblocks.loadLanguages({ es, de })
+// Register the language files with snapblocks
+snapblocks.loadLanguages({ es, de })
 
 function MyComponent() {
   return (
-    <ScratchBlocks
+    <SnapBlocks
       blockStyle="scratch3"
       languages={["en", "es", "de"]} // Choose which languages to allow
     >
@@ -80,15 +80,15 @@ function MyComponent() {
           gehe (10) er Schritt
         fin
       `}
-    </ScratchBlocks>
+    </SnapBlocks>
   )
 }
 ```
 
 ## Available Props
 
-| Name          | Default    | Valid Values                                    | Description                                                                           |
-| ------------- | ---------- | ----------------------------------------------- | ------------------------------------------------------------------------------------- |
-| blockStyle    | "scratch2" | "scratch2" or "scratch3"                        | Changes the visual style of the rendered blocks.                                      |
-| languages     | ["en"]     | An array of language codes such as ["en", "de"] | Enables the use of non-english languages. Requires additional setup.                  |
-| ... and more! |            |                                                 | All other props (such as "className" and "style") will be passed directly to the div. |
+| Name          | Default  | Valid Values                                                             | Description                                                                           |
+| ------------- | ------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| blockStyle    | "snap"  | "snap", "snap-flat", "scratch2", "scratch3", or "scratch3-high-contrast" | Changes the visual style of the rendered blocks.                                      |
+| languages     | ["en"]  | An array of language codes such as ["en", "de"]                          | Enables the use of non-english languages. Requires additional setup.                  |
+| ... and more! |         |                                                                          | All other props (such as "className" and "style") will be passed directly to the div. |

@@ -1,7 +1,7 @@
 {
-  "name": "scratchblocks-react",
-  "version": "1.0.1",
-  "description": "Render scratchblocks in React",
+  "name": "snapblocks-react",
+  "version": "1.0.0",
+  "description": "Render snapblocks in React",
   "main": "dist/index.js",
   "files": [
     "/dist"
@@ -21,7 +21,7 @@
   },
   "peerDependencies": {
     "react": "^16.8.0-0",
-    "scratchblocks": "^3.5.0"
+    "snapblocks": "^1.1.1"
   },
   "dependencies": {}
 }
