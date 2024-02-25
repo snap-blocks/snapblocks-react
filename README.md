@@ -87,8 +87,13 @@ function MyComponent() {
 
 ## Available Props
 
+
 | Name          | Default  | Valid Values                                                             | Description                                                                           |
 | ------------- | ------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
 | blockStyle    | "snap"  | "snap", "snap-flat", "scratch2", "scratch3", or "scratch3-high-contrast" | Changes the visual style of the rendered blocks.                                      |
 | languages     | ["en"]  | An array of language codes such as ["en", "de"]                          | Enables the use of non-english languages. Requires additional setup.                  |
+| wrap          | {true}  | {true} or {false}                                                        | Enables block wrapping.                                                               |
+| wrapSize      | {null}  | {number} or {null}                                                       | Set block wrap size.                                                                  |
+| zebraColoring | {true}  | {true} or {false}                                                        | Enables zebra coloring.                                                               |
+| inline        | {false} | {true} or {false}                                                        | Write snapblocks inline in text. This is not recommended.                             |
 | ... and more! |         |                                                                          | All other props (such as "className" and "style") will be passed directly to the div. |
