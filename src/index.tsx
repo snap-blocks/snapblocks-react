@@ -1,45 +1,77 @@
 import * as React from "react"
 
-import snapblocks from "snapblocks"
-
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  blockStyle?: "snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast"
+  blockStyle?: "snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast",
   languages?: string[],
-  wrap?: boolean,
   inline?: boolean,
+  wrap?: boolean,
   wrapSize?: number | null,
   zebraColoring?: boolean,
 }
 
-const SnapBlocks: React.FunctionComponent<Props> = ({
-  blockStyle,
-  languages,
-  inline,
-  wrap,
-  wrapSize,
-  zebraColoring,
-  children,
-  ...props
-}) => {
-  const ref = React.useRef(null)
+interface Options {
+  style?: "snap" | "snap-flat" | "scratch2" | "scratch3" | "scratch3-high-contrast",
+  languages?: string[],
+  inline?: boolean,
+  wrap?: boolean,
+  wrapSize?: number | null,
+  zebraColoring?: boolean,
+}
 
-  React.useEffect(() => {
-    let options: any = {}
-    if (blockStyle !== undefined) options.style = blockStyle
-    if (languages !== undefined) options.languages = languages
-    if (inline !== undefined) options.languages = inline
-    if (wrap !== undefined) options.style = wrap
-    if (wrapSize !== undefined) options.languages = wrapSize
-    if (zebraColoring !== undefined) options.languages = zebraColoring
 
-    const doc = snapblocks.parse(children, options)
+class SnapBlocks extends React.Component {
+  snapblocks: any
+  isBrowser: boolean
+  blockRef: React.RefObject<any>
+  props: Props
+
+  constructor(props: Props) {
+    super(props)
+  
+    this.snapblocks = null
+    this.isBrowser = typeof window != 'undefined'
+    this.blockRef = React.createRef()
+  }
+
+  async importSnapblocks() {
+    const snapblocks = await import('snapblocks')
+    return snapblocks.default
+  }
+
+  async renderBlocks() {
+    const snapblocks = await this.importSnapblocks()
+
+    let options: Options = {
+      wrap: true,
+      zebraColoring: true,
+    }
+    if (this.props.blockStyle !== undefined) options.style = this.props.blockStyle
+    if (this.props.languages !== undefined) options.languages = this.props.languages
+    if (this.props.inline !== undefined) options.inline = this.props.inline
+    if (this.props.wrap !== undefined) options.wrap = this.props.wrap
+    if (this.props.wrapSize !== undefined) options.wrapSize = this.props.wrapSize
+    if (this.props.zebraColoring !== undefined) options.zebraColoring = this.props.zebraColoring
+
+    const doc = snapblocks.parse(this.props.children, options)
     const svg = snapblocks.render(doc, options)
 
-    ref.current.innerHTML = ""
-    ref.current.appendChild(svg)
-  }, [blockStyle, languages, children])
+    const node: any = this.blockRef.current
+    if (node == null) {
+      return
+    }
+    node.innerHTML = ""
+    node.appendChild(svg)
+  }
 
-  return <div ref={ref} {...props} />
+  componentDidMount() {
+    if (this.isBrowser) {
+      this.renderBlocks()
+    }
+  }
+
+  render() {
+    return <div ref={this.blockRef}></div>
+  }
 }
 
 export default SnapBlocks

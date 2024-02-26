@@ -96,4 +96,5 @@ function MyComponent() {
 | wrapSize      | {null}  | {number} or {null}                                                       | Set block wrap size.                                                                  |
 | zebraColoring | {true}  | {true} or {false}                                                        | Enables zebra coloring.                                                               |
 | inline        | {false} | {true} or {false}                                                        | Write snapblocks inline in text. This is not recommended.                             |
-| ... and more! |         |                                                                          | All other props (such as "className" and "style") will be passed directly to the div. |
+
+Unfortunately I don't know how to pass all properties, such as `className` and `style` onto the resulting element without running into an error with the custom properties, so this does not support those properties. If you would still like to use them, wrap the `<SnapBlocks>` component in a container, or even a wrapper component.
