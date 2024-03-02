@@ -21,7 +21,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "snapblocks": "^1.1.1"
+    "snapblocks": "latest"
   },
   "dependencies": {}
 }
