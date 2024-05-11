@@ -67,14 +67,33 @@ class SnapBlocks extends React.Component {
     node.appendChild(svg)
   }
 
+  setBlockCode() {
+    const node: any = this.blockRef.current
+    if (node == null) {
+      return
+    }
+    node.innerHTML = ""
+    let el = <code>{this.props.children}</code>
+    if (!this.props.inline) {
+      el = <pre>{el}</pre>
+    }
+    node.appendChild(el)
+  }
+
   componentDidMount() {
     if (this.isBrowser) {
       this.renderBlocks()
+    } else {
+      this.setBlockCode()
     }
   }
 
   render() {
-    return <div ref={this.blockRef}></div>
+    if (this.props.inline) {
+      return <span ref={this.blockRef}></span>
+    } else {
+      return <div ref={this.blockRef}></div>
+    }
   }
 }
 
