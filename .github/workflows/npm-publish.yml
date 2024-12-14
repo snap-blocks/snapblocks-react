@@ -25,7 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "build/*.js"
+          file: "dist/*"
           update_latest_release: true
           release_id: ${{ github.event.release.id }}
 
