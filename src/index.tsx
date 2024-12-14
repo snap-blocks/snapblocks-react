@@ -8,6 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   wrapSize?: number | null,
   zebraColoring?: boolean,
   showSpaces?: boolean,
+  santa?: boolean,
 }
 
 interface Options {
@@ -18,6 +19,7 @@ interface Options {
   wrapSize?: number | null,
   zebraColoring?: boolean,
   showSpaces?: boolean,
+  santa?: boolean,
 }
 
 
@@ -55,6 +57,7 @@ class SnapBlocks extends React.Component {
     if (this.props.wrapSize !== undefined) options.wrapSize = this.props.wrapSize
     if (this.props.zebraColoring !== undefined) options.zebraColoring = this.props.zebraColoring
     if (this.props.showSpaces !== undefined) options.showSpaces = this.props.showSpaces
+    if (this.props.santa !== undefined) options.santa = this.props.santa
 
     const doc = snapblocks.parse(this.props.children, options)
     const svg = snapblocks.render(doc, options)
